@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">歡迎來到旗津海牛外送系統</h2>
+
+{% if session.username %}
+<p>👋 你好，<strong>{{ session.username }}</strong>！</p>
+
+<p>這個系統可以讓你在旗津也能享受外送服務</p>
+<p>外送員會透過渡輪或過港隧道幫您把訂單送至旗津</p>
+<p>也可以讓外送員幫你到超商、餐廳購買指定物品</p>
+
+
+{% if latest_order %}
+<div class="alert alert-info">📢 最近訂單狀態：{{ latest_order[0] }} x{{ latest_order[1] }} — <strong>{{ latest_order[2] }}</strong></div>
+{% else %}
+<p class="text-muted">目前尚無訂單紀錄。</p>
+{% endif %}
+
+<ul class="list-group mb-3">
+  <li class="list-group-item"><a href="/order">🛒 下訂單</a></li>
+  <li class="list-group-item"><a href="/my_orders">📦 查看我的訂單</a></li>
+  {% if session.username == 'admin' %}
+  <li class="list-group-item"><a href="/manage_orders">🛠 管理訂單（管理員）</a></li>
+  {% endif %}
+  <li class="list-group-item"><a href="/logout">🚪 登出</a></li>
+</ul>
+
+<p style="color: red; font-weight: bold;">
+    !!! 我們只有一位外送員，敬請大家耐心等待，感謝您 !!! </p>
+
+{% else %}
+<a href="/login" class="btn btn-primary">登入</a>
+<a href="/register" class="btn btn-secondary">註冊</a>
+{% endif %}
+{% endblock %}

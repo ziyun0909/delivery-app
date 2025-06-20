@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>我的訂單</h2>
+
+{% if orders %}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr><th>餐點</th><th>數量</th><th>狀態</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    {% for item, qty, status, order_id in orders %}
+    <tr>
+        <td>{{ item }}</td>
+        <td>{{ qty }}</td>
+        <td>{{ status }}</td>
+        <td>
+            {% if status == '準備中' %}
+            <form method="post" action="/cancel_order/{{ order_id }}">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('確定要取消嗎？')">取消</button>
+            </form>
+            {% else %}
+            -
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-muted">目前沒有訂單。</p>
+{% endif %}
+<a href="/" class="btn btn-secondary">回首頁</a>
+{% endblock %}
