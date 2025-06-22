@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>下訂單</h2>
+<form method="post" class="mb-3">
+    <div class="mb-2">
+        <label class="form-label">商店名稱：</label>
+        <input type="text" name="item" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label class="form-label">餐點、物品名稱：</label>
+        <input type="text" name="item" class="form-control" required>
+    </div>
+
+    <div class="mb-2">
+        <label class="form-label">數量：</label>
+        <input type="number" name="quantity" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">送出訂單</button>
+</form>
+<a href="/" class="btn btn-link">回首頁</a>
+{% endblock %}
